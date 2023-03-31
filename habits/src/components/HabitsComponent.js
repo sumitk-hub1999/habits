@@ -2,6 +2,7 @@ import React from "react";
 
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import habitItem from "./habitItem";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -33,5 +34,96 @@ function HabitsComponent() {
     let Array21 = [];
     let dates = [];
     //loop through the next 21 days and print dates
+    for (let i = 0; i < 21; i++) {
+      const nextDate = new Date();
+      nextDate.setDate(today.getDate() + i);
+      let formattedDate = showDate(nextDate);
+      Array21.push(formattedDate);
+      let currentDate = { date: Array21[i], status: "none" };
+      dates.push(currentDate);
+    }
+    //create habit object with all info
+    let newHabit = {
+      id: Date.now(),
+      title: habit,
+      description: description,
+      dates: dates,
+    };
+    //setting state empty so that input box empty
+    setHabit("");
+    setDescription("");
+    //dispatching newhabit object data to addHabitHandler reducer from habitslice
+    dispatch(addHabitHandler(newHabit));
   };
+  //the function helps adding habit on clicking enter
+  const addHabitOnEnter = (e) => {
+    //13 is keycode of enter button
+    if (e.keyCode === 13) {
+      addHabitBtn.current.click();
+    }
+  };
+
+  //useSElector hook is used to get the data from redux store which is array of objects containing properties of hobit
+  const data = useSelector((h) => {
+    console.log(h.habit.habits);
+    return h.habit.habits;
+  });
+
+  return (
+    <div className="container">
+      <div className="bar-container">
+        <section className="habitAdder">
+          <div className="input">
+            <span className="icon">
+              <i className="fa-solid fa-circle-info"></i>
+            </span>
+            <input
+              onChange={(e) => setHabit(e.target.value)}
+              value={habit}
+              type="text"
+              placeholder="enter the name of the habit"
+              onKeyDown={addHabitOnEnter}
+            />
+          </div>
+          <div className="input">
+            <span className="icon">
+              <i className="fa-solid fa-circle-info"></i>
+            </span>
+            <input
+              onChange={(e) => setDescription(e.target.value)}
+              value={description}
+              type="text"
+              placeholder="write description (optional)"
+              onKeyDown={addHabitOnEnter}
+            />
+          </div>
+          <button onClick={addHabit} ref={addHabitBtn}>
+            Add Habit
+          </button>
+        </section>
+        <div className="habit-container">
+          <div className="habits-list">
+            {data.length === 0 && (
+              <h1 className="no-habit-text">No habits added yet</h1>
+            )}
+            {data.map((habit, index) => {
+              return (
+                <habitItem
+                  habitName={habit.title}
+                  habitDescription={habit.description}
+                  habitStatus={habit.dates}
+                  habitId={habit.id}
+                  key={index}
+                  isVsibleId={isVisibleId === habit.id}
+                  setIsVisibleId={setIsVisibleId}
+                />
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
+
+export default HabitsComponent;

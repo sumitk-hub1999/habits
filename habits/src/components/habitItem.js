@@ -21,3 +21,5 @@ function habitItem({
     const dates = document.getElementsByClassName("dates");
   });
 }
+
+export default habitItem;

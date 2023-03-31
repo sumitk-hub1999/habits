@@ -1,5 +1,5 @@
 import React from "react";
-
+import HabitsComponent from "./components/HabitsComponent";
 import "./App.css";
 
 function App() {
