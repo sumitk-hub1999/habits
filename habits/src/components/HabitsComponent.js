@@ -3,6 +3,7 @@ import React from "react";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import habitItem from "./habitItem";
+import { addHabitHandler } from "../features/habitslice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -75,7 +76,7 @@ function HabitsComponent() {
         <section className="habitAdder">
           <div className="input">
             <span className="icon">
-              <i className="fa-solid fa-circle-info"></i>
+              <i className="fa-solid fa-repeat"></i>
             </span>
             <input
               onChange={(e) => setHabit(e.target.value)}
@@ -97,7 +98,7 @@ function HabitsComponent() {
               onKeyDown={addHabitOnEnter}
             />
           </div>
-          <button onClick={addHabit} ref={addHabitBtn}>
+          <button onClick={addHabit} ref={addHabitBtn} class="addbtn">
             Add Habit
           </button>
         </section>
@@ -122,6 +123,18 @@ function HabitsComponent() {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover={false}
+        theme="dark"
+      />
     </div>
   );
 }
