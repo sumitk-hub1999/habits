@@ -43,12 +43,24 @@ export const habitSlice = createSlice({
 
     updateHabitHandler: (state, action) => {
       const data = action.payload;
-      const HabitArrayLs = JSON.parse(localStorage.getItem("habits"));
-      let habitupdate = HabitArrayLs.filter((habit) => habit.id === data.id);
-      let habitObjectupdate = habitupdate[0];
-      let DateArray = habitObjectupdate.dates.map((date) => {
+
+      const habitsArrayFromLocalStorage = JSON.parse(
+        localStorage.getItem("habits")
+      );
+      let habitToBeUpdated = habitsArrayFromLocalStorage.filter(
+        (habit) => habit.id === data.id
+      );
+      let habitObjectToBeUpdated = habitToBeUpdated[0];
+      // console.log(habitToBeUpdated[0].dates[0]);
+      // console.log(typeof data.date);
+      // var indexOfDate;
+
+      /*
+       * iterating through the date object and as soon as the date matches the payload date we change the completion status according to the current status
+       */
+      let newDateArray = habitObjectToBeUpdated.dates.map((date) => {
         if (date.date === data.date) {
-          console.log(date.status);
+          // console.log(date.status);
           if (date.status === "none") {
             date.status = "done";
           } else if (date.status === "done") {
@@ -56,18 +68,34 @@ export const habitSlice = createSlice({
           } else if (date.status === "fail") {
             date.status = "none";
           }
+          // console.log(date);
         }
+        // returning the new date array
         return date;
       });
+      // habitObjectToBeUpdated.dates = newDateArray;
 
-      let newHabitsArrayLs = HabitArrayLs.map((habit) => {
-        if (data.id === habit.id) {
-          habit.dates = DateArray;
-        }
-        return habit;
-      });
-      localStorage.setItem("habits", JSON.stringify(newHabitsArrayLs));
-      state.habits = newHabitsArrayLs;
+      /*
+       * Searching the habit by its id and then replacing that habit's object date's object
+       */
+      let newHabitsArrayToBeStoredInLocalStorage =
+        habitsArrayFromLocalStorage.map((habit) => {
+          if (data.id === habit.id) {
+            habit.dates = newDateArray;
+          }
+          return habit;
+        });
+      // console.log(newHabitsArrayToBeStoredInLocalStorage);
+
+      /*
+       * updating the local storage with the new updated date object
+       * and also updating the habit state so that changes are also visible in UI
+       */
+      localStorage.setItem(
+        "habits",
+        JSON.stringify(newHabitsArrayToBeStoredInLocalStorage)
+      );
+      state.habits = newHabitsArrayToBeStoredInLocalStorage;
     },
   },
 });

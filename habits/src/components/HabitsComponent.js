@@ -2,7 +2,7 @@ import React from "react";
 
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import habitItem from "./habitItem";
+import HabitItem from "./HabitItem";
 import { addHabitHandler } from "../features/habitslice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -27,24 +27,30 @@ function HabitsComponent() {
       var d = date.getDate();
       var m = date.getMonth() + 1;
       var y = date.getFullYear().toString().substring(2);
+      if (d < 10) {
+        d = "0" + d;
+      }
+      if (m < 10) {
+        m = "0" + m;
+      }
       date = d + "/" + m + "/" + y;
       return date;
     }
     //get todays date
     const today = new Date();
-    let Array21 = [];
+    let next21daysArray = [];
     let dates = [];
     //loop through the next 21 days and print dates
     for (let i = 0; i < 21; i++) {
       const nextDate = new Date();
       nextDate.setDate(today.getDate() + i);
       let formattedDate = showDate(nextDate);
-      Array21.push(formattedDate);
-      let currentDate = { date: Array21[i], status: "none" };
+      next21daysArray.push(formattedDate);
+      let currentDate = { date: next21daysArray[i], status: "none" };
       dates.push(currentDate);
     }
     //create habit object with all info
-    let newHabit = {
+    let habitToBeAdded = {
       id: Date.now(),
       title: habit,
       description: description,
@@ -54,7 +60,7 @@ function HabitsComponent() {
     setHabit("");
     setDescription("");
     //dispatching newhabit object data to addHabitHandler reducer from habitslice
-    dispatch(addHabitHandler(newHabit));
+    dispatch(addHabitHandler(habitToBeAdded));
   };
   //the function helps adding habit on clicking enter
   const addHabitOnEnter = (e) => {
@@ -98,7 +104,7 @@ function HabitsComponent() {
               onKeyDown={addHabitOnEnter}
             />
           </div>
-          <button onClick={addHabit} ref={addHabitBtn} class="addbtn">
+          <button onClick={addHabit} ref={addHabitBtn} className="addbtn">
             Add Habit
           </button>
         </section>
@@ -109,13 +115,13 @@ function HabitsComponent() {
             )}
             {data.map((habit, index) => {
               return (
-                <habitItem
+                <HabitItem
                   habitName={habit.title}
                   habitDescription={habit.description}
                   habitStatus={habit.dates}
                   habitId={habit.id}
                   key={index}
-                  isVsibleId={isVisibleId === habit.id}
+                  isVisibleId={isVisibleId === habit.id}
                   setIsVisibleId={setIsVisibleId}
                 />
               );

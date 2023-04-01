@@ -93,3 +93,141 @@
   text-align: center;
   font-weight: 500;
 }
+.contains-all-habit {
+  position: relative;
+  width: 76%;
+  height: 100%;
+}
+
+.habit-container {
+  /* position: relative; */
+  height: 65vh;
+  width: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.habit-container::-webkit-scrollbar {
+  display: none;
+}
+.list-of-habits {
+  background-color: rgba(255, 255, 255, 0.747);
+  color: black;
+  border: 1px solid black;
+  border-radius: 10px;
+  width: 98%;
+  /* height: 265px; */
+  margin: 10px;
+  padding: 10px 20px;
+  /* box-shadow: 0 0 7px var(--habit-shadow); */
+  display: flex;
+  align-items: center;
+  position: relative;
+  flex-direction: column;
+}
+
+.name-and-icon {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.accordion-icon-up,
+.accordion-icon-down {
+  cursor: pointer;
+}
+
+.habit-details {
+  display: flex;
+  flex-direction: column;
+  margin: 7px 0;
+}
+
+.habit-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.habit-description {
+  color: black;
+  font-size: 0.8rem;
+}
+
+/* .habit-details {
+  width: 200px;
+} */
+
+.seven-days-of-week table {
+  border-collapse: collapse;
+  width: 100%;
+  /* overflow-x: scroll; */
+}
+
+.seven-days-of-week th,
+td {
+  height: 30px;
+  /* width: 100px; */
+  border: 1px solid rgb(120, 120, 120);
+  text-align: center;
+}
+
+/* .seven-days-of-week th {
+  width: 100px;
+}
+
+.seven-days-of-week td {
+  width: 100px;
+} */
+
+.seven-days-of-week td .done {
+  color: hsl(120deg 100% 39%);
+  /* box-shadow: 0 0 10px 2px; */
+  border-radius: 50%;
+}
+
+.seven-days-of-week td .fail {
+  color: red;
+  /* box-shadow: 0 0 8px; */
+  border-radius: 50%;
+}
+
+.seven-days-of-week td {
+  cursor: pointer;
+}
+
+.seven-days-of-week {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-self: flex-end;
+}
+
+.delete-btn {
+  height: 35px;
+  background: var(--delete-btn);
+  width: 35px;
+  border-radius: 0 10px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 0 0 7px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.backdrop {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: #7f7ff1cf;
+  font-size: 1.5rem;
+  color: white;
+  font-weight: 500;
+  text-align: center;
+}
