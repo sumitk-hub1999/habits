@@ -2,8 +2,8 @@ import React from "react";
 
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Habititem from "./Habititem";
-import { addHabitHandler } from "../features/habitslice";
+import Habititem from "./Habititem.js";
+import { addHabitHandler } from "../features/habitslice.js";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
