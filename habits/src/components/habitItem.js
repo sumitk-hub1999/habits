@@ -5,7 +5,7 @@ import { deleteHabitHandler, updateHabitHandler } from "../features/habitslice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-function HabitItem({
+function Habititem({
   habitName,
   habitDescription,
   habitStatus,
@@ -274,4 +274,4 @@ function HabitItem({
   );
 }
 
-export default HabitItem;
+export default Habititem;

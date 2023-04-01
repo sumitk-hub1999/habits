@@ -2,7 +2,7 @@ import React from "react";
 
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import HabitItem from "./HabitItem";
+import Habititem from "./Habititem";
 import { addHabitHandler } from "../features/habitslice";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -115,7 +115,7 @@ function HabitsComponent() {
             )}
             {data.map((habit, index) => {
               return (
-                <HabitItem
+                <Habititem
                   habitName={habit.title}
                   habitDescription={habit.description}
                   habitStatus={habit.dates}
