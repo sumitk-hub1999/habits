@@ -131,7 +131,7 @@ function Habititem({
                       </th>
                     );
                   }
-                  return null;
+                  return;
                 })}
               </tr>
             </thead>
@@ -158,7 +158,7 @@ function Habititem({
                       </td>
                     );
                   }
-                  return null;
+                  return;
                 })}
               </tr>
             </tbody>
@@ -175,7 +175,7 @@ function Habititem({
                       </th>
                     );
                   }
-                  return null;
+                  return;
                 })}
               </tr>
             </thead>
@@ -191,7 +191,6 @@ function Habititem({
                         data-date={habitStatus[index].date}
                         className="date-status"
                       >
-                        {/* displaying the none, done or fail icon accoring to the state */}
                         {habitStatus[index].status === "none" ? (
                           <i class="fa-solid fa-minus"></i>
                         ) : habitStatus[index].status === "done" ? (
@@ -202,7 +201,7 @@ function Habititem({
                       </td>
                     );
                   }
-                  return null;
+                  return;
                 })}
               </tr>
             </tbody>
